@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Windows.Input;
+﻿using Alura.Adopet.Console.Util;
+using System.Reflection;
 
 namespace Alura.Adopet.Console.Comandos
 {
@@ -12,10 +12,7 @@ namespace Alura.Adopet.Console.Comandos
 
         public Help()
         {
-            docs = Assembly.GetExecutingAssembly().GetTypes()
-             .Where(t => t.GetCustomAttributes<DocComando>().Any())
-             .Select(t => t.GetCustomAttribute<DocComando>()!)
-             .ToDictionary(d => d.Instrucao);
+            docs = DocumentacaoDoSistema.ToDictionary(Assembly.GetExecutingAssembly());
         }
 
         public Task ExecutarAsync(string[] args)
